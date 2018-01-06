@@ -18,4 +18,6 @@ jobs:
           name: Sandbox provisioning
           command: |
             build-init
+            slack "Started sandbox build for branch *${GIT_BRANCH_NAME}*"
             ssh docker-host "cd $REMOTE_BUILD_DIR && fin init"
+            slack "Completed sandbox build for branch *${GIT_BRANCH_NAME}*:\n<http://${DOMAIN}|http://${DOMAIN}>"
