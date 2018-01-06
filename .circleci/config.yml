@@ -1,0 +1,23 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: /home/agent/build
+    docker:
+      - image: docksal/ci-agent
+    environment:
+       # Tell CircleCI where to read the shared build environment variables from
+       BASH_ENV: /home/agent/.bashrc
+    steps:
+      - checkout
+      - run:
+          name: Configure local build environment
+          command: |
+            touch $BASH_ENV
+            echo 'source build-env' >> $BASH_ENV
+      - run:
+          name: Initialize remote build environment
+          command: build-init
+      - run:
+          name: Sandbox provisioning on remote Docker host
+          command: ssh docker-host "cd $REMOTE_BUILD_DIR && fin init"
