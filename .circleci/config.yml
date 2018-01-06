@@ -19,10 +19,3 @@ jobs:
           command: |
             build-init
             ssh docker-host "cd $REMOTE_BUILD_DIR && fin init"
-
-workflows:
-  version: 2
-  default-workflow:
-    jobs:
-      - build:
-          context: org-global  # Load org level environment variables from CircleCI
