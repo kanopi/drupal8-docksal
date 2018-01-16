@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: /home/agent/build
     docker:
-      - image: seandietrich/ci-agent:latest
+      - image: seandietrich/ci-agent:base
     environment:
        BASH_ENV: /home/agent/.bashrc  # Tell CircleCI where to read the shared build environment variables from
     steps:
@@ -21,3 +21,10 @@ jobs:
             slack "Started sandbox build for branch *${GIT_BRANCH_NAME}*"
             ssh docker-host "cd $REMOTE_BUILD_DIR && fin init"
             slack "Completed sandbox build for branch *${GIT_BRANCH_NAME}*:\n<http://${DOMAIN}|http://${DOMAIN}>"
+
+workflows:
+  version: 2
+  default-workflow:
+    jobs:
+      - build:
+          context: org-global  # Load org level environment variables from CircleCI
