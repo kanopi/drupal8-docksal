@@ -21,3 +21,10 @@ jobs:
             slack "Started sandbox build for branch *${GIT_BRANCH_NAME}*"
             ssh docker-host "cd $REMOTE_BUILD_DIR && fin init"
             slack "Completed sandbox build for branch *${GIT_BRANCH_NAME}*:\n<http://${DOMAIN}|http://${DOMAIN}>"
+
+workflows:
+  version: 2
+  build_sandbox:
+    jobs:
+      - build:
+          context: org-global
