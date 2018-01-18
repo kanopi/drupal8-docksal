@@ -54,3 +54,4 @@ Some common tasks that can be handled by the init script:
 - compile Sass
 - run DB updates, revert features, clear caches, etc.
 - enable/disable modules, update variables values
+
